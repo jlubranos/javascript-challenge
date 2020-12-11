@@ -2,19 +2,50 @@
 var tableData = data;
 
 // YOUR CODE HERE!
-function isDate(searchDate) {
-    if (searchDate.match(/^(?:(0[1-9]|1[012])[\- \/.](0[1-9]|[12][0-9]|3[01])[\- \/.](19|20)[0-9]{2})$/)){
-        return true;
-    }else{
-        return false;
+function exist(obj,string) {
+    for(let x=0; x<obj.length; x++) {
+        if (obj[x].text===string) {
+            return true;
+        }
     }
+    return false;
 }
 
-function convertDate(searchDate) {
-    if (searchDate[0]=="0") {
-        searchDate=searchDate.slice(1,10);
-    }
-return searchDate;
+function loadoptions(){
+    tableData.forEach((data)=> {
+        Object.entries(data).forEach(([key,value])=>{
+            if (key=="datetime") {
+                let date=document.getElementById("selectDate");
+                if (exist(date,value)==false) {
+                    date.append(new Option(value,key));
+                }
+            }
+            if (key=="city") {
+                let city=document.getElementById("selectCity");
+                if (exist(city,value)==false) {
+                    city.append(new Option(value,key));
+                }
+            }
+            if (key=="state") {
+                let state=document.getElementById("selectState");
+                if (exist(state,value)==false) {
+                    state.append(new Option(value,key));
+                }
+            }
+            if (key=="country") {
+                let country=document.getElementById("selectCountry");
+                if (exist(country,value)==false) {
+                    country.append(new Option(value,key));
+                }
+            }
+            if (key=="shape") {
+                let shape=document.getElementById("selectShape");
+                if (exist(shape,value)==false) {
+                    shape.append(new Option(value,key));
+                }
+            }
+        });
+    });
 }
 
 function clearTable() {
@@ -27,14 +58,6 @@ function clearTable() {
 }
 
 function insertTablerow(tableData) {
-    console.log(tableData.datetime);
-    console.log(tableData.city);
-    console.log(tableData.state);
-    console.log(tableData.country);
-    console.log(tableData.shape);
-    console.log(tableData.durationMinutes);
-    console.log(tableData.comments);
-
     let numberRows=document.getElementById("ufo-table").rows.length;
     let newRow=document.getElementById('ufo-table').insertRow(numberRows);
 
@@ -55,29 +78,49 @@ function insertTablerow(tableData) {
     comments.innerHTML=tableData.comments;
 }
 
-function readList(searchDate) {
-    let found=false;
+function readList(criteria) {
     for(let i=0; i<tableData.length; i++) {
-        if (searchDate==tableData[i].datetime) {
+        let found=0;
+        if (criteria.date==tableData[i].datetime || criteria.date==="All" || criteria.date==="Select Date") {
+            found++;
+        }
+        if (criteria.city==tableData[i].city || criteria.city==="All" || criteria.city==="Select City") {
+            found++;
+        }
+        if (criteria.state==tableData[i].state || criteria.state==="All" || criteria.state==="Select State") {
+            found++;
+        }
+        if (criteria.country==tableData[i].country || criteria.country==="All" || criteria.country==="Select Country") {
+            found++;
+        }
+        if (criteria.shape==tableData[i].shape || criteria.shape==="All" || criteria.shape==="Select Shape") {
+            found++;
+        }                                
+        if (found===5) {
             insertTablerow(tableData[i]);
-            found=true;
         }
     }
-    if (!found) {
+    if (found<5) {
         alert("No sitings reported on this date.....")
     }
 }
 
 function checksited(event) {
-    let x=event.which || event.keyCode;
- //   if (x==13) {
- //       console.log("Enter Key Pressed...");
-    let searchDate=document.getElementById("datetime").value;
-//        console.log("Search Date:",searchDate);
-    if (isDate(searchDate)) {
-        searchDate=convertDate(searchDate);
-        clearTable();
-        readList(searchDate);
-        }
- //   }
+    let criteria={};
+
+    let date = document.getElementById("selectDate");
+    criteria.date=date.options[date.selectedIndex].text;
+    let city = document.getElementById("selectCity");
+    criteria.city=city.options[city.selectedIndex].text;
+    let state = document.getElementById("selectState");
+    criteria.state=state.options[state.selectedIndex].text;
+    let country = document.getElementById("selectCountry");
+    criteria.country=country.options[country.selectedIndex].text;
+    let shape = document.getElementById("selectShape");
+    criteria.shape=shape.options[shape.selectedIndex].text;
+    console.log("Criteria:");
+    console.log(criteria);
+    clearTable();
+    readList(criteria);
 }
+loadoptions();

@@ -27,63 +27,80 @@
     </div>
     <div class="container">
       <div class="row margin-top-50">
-        <div class="col-md-2">
-          <aside class="filters">
-            <div class="panel panel-default">
-              <div class="panel-heading">Filter Search</div>
-              <div class="panel-body">
-                <form>
-                  <div class="form-group">
-                    <ul class="list-group" id="filters">
-                      <li class="filter list-group-item">
-                        <label for="date">Enter a Date</label>
-                        <input class="form-control" id="datetime" type="text" placeholder="1/11/2011">
-                      </li>
-                    </ul>
-                  </div>
-                  <button id="filter-btn" type="button" class="btn btn-default" onclick="checksited(event)">Filter Table</button>
-                </form>
-              </div>
+        <form onclick="return false">
+          <div class="row option_center">
+            <h3>Please select options available...</h3>
+          </div>
+          <div class="row option_center">
+            <div class="col-sm-2">
+              <select class="custom-select mr-sm-2" id="selectDate">
+                <option selected>Select Date</option>
+                <option value="date">All</option>
+              </select>
             </div>
-          </aside>
-        </div>
-        <div class="col-md-10">
-          <div id="table-area" class="">
-            <table id="ufo-table" class="table table-striped">
-              <thead>
-                <tr>
-                  <th class="table-head">Date</th>
-                  <th class="table-head">City</th>
-                  <th class="table-head">State</th>
-                  <th class="table-head">Country</th>
-                  <th class="table-head">Shape</th>
-                  <th class="table-head">Duration</th>
-                  <th class="table-head">Comments</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-              </tbody>
-            </table>
+            <div class="col-sm-2">
+              <select class="custom-select mr-sm-2" id="selectCity">
+                <option selected>Select City</option>
+                <option value="1">All</option>
+              </select>
+            </div>
+            <div class="col-sm-2"> 
+              <select class="custom-select mr-sm-2" id="selectState">
+                <option selected>Select State</option>
+                <option value="1">All</option>
+              </select>
+            </div>
+            <div class="col-sm-2">
+              <select class="custom-select mr-sm-2" id="selectCountry">
+                <option selected>Select Country</option>
+                <option value="1">All</option>
+              </select>
+            </div>
+            <div class="col-sm-2">
+              <select class="custom-select mr-sm-2" id="selectShape">
+                <option selected>Select Shape</option>
+                <option value="1">All</option>
+              </select>
+            </div>
+              <button type="submit" class="btn btn-primary" onclick="checksited(event)">Submit</button>
+            </div>
+          </form>            
+          <div class="col-md-10">
+            <div id="table-area" class="">
+              <table id="ufo-table" class="table table-striped">
+                <thead>
+                  <tr>
+                    <th class="table-head">Date</th>
+                    <th class="table-head">City</th>
+                    <th class="table-head">State</th>
+                    <th class="table-head">Country</th>
+                    <th class="table-head">Shape</th>
+                    <th class="table-head">Duration</th>
+                    <th class="table-head">Comments</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>                  
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
+      <footer class="footer">
+        <span class="bottom">UFO Sightings</span>
+      </footer>
     </div>
-    <footer class="footer">
-      <span class="bottom">UFO Sightings</span>
-    </footer>
-  </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.11.0/d3.js"></script>
   <script src="../static/js/data.js"></script>
   <script src="../static/js/app.js"></script>
 </body>
-
 </html>

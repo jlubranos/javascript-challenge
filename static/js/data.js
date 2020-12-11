@@ -641,7 +641,7 @@ var data = [{
     datetime: "1/9/2010",
     city: "london (canada)",
     state: "on",
-    country: "ca",
+    country: "us",
     shape: "disk",
     durationMinutes: "10-20 mins",
     comments: "very close encounter with what i truley cant imagine"
@@ -893,7 +893,7 @@ var data = [{
     datetime: "1/11/2010",
     city: "ingleside (canada)",
     state: "on",
-    country: "ca",
+    country: "us",
     shape: "triangle",
     durationMinutes: "5 minutes",
     comments: "triangle shaped craft with four coloured lights"
