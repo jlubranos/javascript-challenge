@@ -20,7 +20,7 @@ function loadSelect(obj,list) {
     });
 }
 
-function loadoptions(){
+function loadOptions(){
 
     let datelist=[];
     let citylist=[];
@@ -129,7 +129,7 @@ function readList(criteria) {
     }
 }
 
-function checksited(event) {
+function checkSited(event) {
 
     let criteria={};
 
@@ -151,4 +151,4 @@ function checksited(event) {
     clearTable();
     readList(criteria);
 }
-loadoptions();
+loadOptions();
