@@ -129,7 +129,7 @@ function readList(criteria) {
     }
 }
 
-function checkSited(event) {
+function checkSited() {
 
     let criteria={};
 
@@ -152,3 +152,4 @@ function checkSited(event) {
     readList(criteria);
 }
 loadOptions();
+checkSited();

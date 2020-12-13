@@ -10,18 +10,6 @@ body {
   margin: 0;
 }
 
-.option_center {
-  text-align:center;
-  line-height:1px;
-}
-
-.custom-select, #custom-select{
-  overflow:hidden;
-  color:royalblue;
-  background-color:#4e5d6c
-  box-shadow:rgb(3, 3, 3);
-}
-
 /* The wrapper contains all of the page's content besides the footer, which is pushed to the bottom of the page */
 .wrapper {
   position: relative;
