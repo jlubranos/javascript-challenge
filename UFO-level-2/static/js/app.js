@@ -80,53 +80,39 @@ function loadOptions(){
 
 }
 
-function clearTable() {
-    let numberRows=document.getElementById("ufo-table").rows.length;
-    if (numberRows>2) {
-        for (let i=0; i<numberRows-2; i++) {
-            document.getElementById("ufo-table").deleteRow(2);
-        }
-    }
+function loadtable(data) {
+    var tbody=d3.select("tbody");
+    data.forEach((siting)=> {
+        var row=tbody.append("tr");
+        Object.entries(siting).forEach(([key,value])=> {
+            var cell=row.append("td");
+            cell.text(value);
+        });
+     });
+
 }
 
-function insertTablerow(tableData) {
-    let numberRows=document.getElementById("ufo-table").rows.length;
-    let newRow=document.getElementById('ufo-table').insertRow(numberRows);
-
-    let datetime=newRow.insertCell(0);
-    let city=newRow.insertCell(1);
-    let state=newRow.insertCell(2);
-    let country=newRow.insertCell(3);
-    let shape=newRow.insertCell(4);
-    let durationMinutes=newRow.insertCell(5);
-    let comments=newRow.insertCell(6);
-
-    datetime.innerHTML=tableData.datetime;
-    city.innerHTML=tableData.city;
-    state.innerHTML=tableData.state;
-    country.innerHTML=tableData.country;
-    shape.innerHTML=tableData.shape;
-    durationMinutes.innerHTML=tableData.durationMinutes;
-    comments.innerHTML=tableData.comments;
+function clearTbody() {
+    var tbody=d3.select("tbody");
+    var tbodyRows=tbody.selectAll("tr");
+    tbodyRows.remove();
 }
 
 function readList(criteria) {
-
-    let found=false;
-
-    for(let i=0; i<tableData.length; i++) {
-        if ((criteria.date==tableData[i].datetime || criteria.date==="All" || criteria.date==="Select Date") &&
-            (criteria.city==tableData[i].city || criteria.city==="All" || criteria.city==="Select City") &&
-            (criteria.state==tableData[i].state || criteria.state==="All" || criteria.state==="Select State") &&
-            (criteria.country==tableData[i].country || criteria.country==="All" || criteria.country==="Select Country") &&
-            (criteria.shape==tableData[i].shape || criteria.shape==="All" || criteria.shape==="Select Shape")) {
-                insertTablerow(tableData[i]);
-                found=true;
-        }
+    let newData=tableData.filter(siting=>
+        (siting.datetime===criteria.date || criteria.date==="All" || criteria.date==="Select Date") &&
+        (siting.city===criteria.city || criteria.city==="All" || criteria.city==="Select City") &&
+        (siting.state===criteria.state || criteria.state==="All" || criteria.state==="Select State") &&
+        (siting.country===criteria.country || criteria.country==="All" || criteria.country==="Select Country") &&
+        (siting.shape===criteria.shape || criteria.shape==="All" || criteria.shape==="Select Shape")
+        );
+    if (newData.length>0) {
+        clearTbody();
+        loadtable(newData);
+    } else {
+        clearTbody();
     }
-    if (!found) {
-        alert("No records found with criteria you entered.....");
-    }
+
 }
 
 function checkSited() {
@@ -148,7 +134,7 @@ function checkSited() {
     let shape = document.getElementById("selectShape");
     criteria.shape=shape.options[shape.selectedIndex].text;
 
-    clearTable();
+    clearTbody();
     readList(criteria);
 }
 loadOptions();
