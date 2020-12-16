@@ -3,6 +3,8 @@ var tableData = data;
 
 // YOUR CODE HERE!
 function exist(list,string) {
+
+    // Check for duplicate in list for dropdown
     for(let x=0; x<list.length; x++) {
         if (list[x]===string) {
             return true;
@@ -12,7 +14,8 @@ function exist(list,string) {
 }
 
 function loadSelect(obj,list) {
-    
+
+    // Load list into dropdown object 
     let i=0;
     list.forEach(function(item) {
         i++;
@@ -22,12 +25,14 @@ function loadSelect(obj,list) {
 
 function loadOptions(){
 
+    // Create the five list which represent the five dropdowns in the html
     let datelist=[];
     let citylist=[];
     let statelist=[];
     let countrylist=[];
     let shapelist=[];
 
+    // Loop through data list and create dropdown options for each list above checking for unique values by calling the exist function
     tableData.forEach((data)=> {
         Object.entries(data).forEach(([key,value])=>{
             if (key=="datetime") {
@@ -58,10 +63,13 @@ function loadOptions(){
         });
     });
 
-//    datelist.sort();
+//  datelist.sort();
+//  did sort datelist due to date format will cause the sort not to sort in date order.
+// Load datelist into the date dropdown.
     let date=document.getElementById("selectDate");
     loadSelect(date,datelist);
 
+// Sort the remaining dropdowns and load each sorted list into its respective dropdown.
     citylist.sort();
     let city=document.getElementById("selectCity");
     loadSelect(city,citylist);
@@ -81,6 +89,8 @@ function loadOptions(){
 }
 
 function loadtable(data) {
+
+    // Create table according to data parameter
     var tbody=d3.select("tbody");
     data.forEach((siting)=> {
         var row=tbody.append("tr");
@@ -93,12 +103,16 @@ function loadtable(data) {
 }
 
 function clearTbody() {
+
+    // Clear table
     var tbody=d3.select("tbody");
     var tbodyRows=tbody.selectAll("tr");
     tbodyRows.remove();
 }
 
 function readList(criteria) {
+    
+    // filter tableData according to criteria dictionary parameter.
     let newData=tableData.filter(siting=>
         (siting.datetime===criteria.date || criteria.date==="All" || criteria.date==="Select Date") &&
         (siting.city===criteria.city || criteria.city==="All" || criteria.city==="Select City") &&
@@ -106,16 +120,24 @@ function readList(criteria) {
         (siting.country===criteria.country || criteria.country==="All" || criteria.country==="Select Country") &&
         (siting.shape===criteria.shape || criteria.shape==="All" || criteria.shape==="Select Shape")
         );
+
+    // Test to see if any results were found.
     if (newData.length>0) {
+    
+    // If found clear the table and load the table with newData passed as an argument
         clearTbody();
         loadtable(newData);
     } else {
+
+    // If no results found clear table if any and return
         clearTbody();
     }
 
 }
 
 function checkSited() {
+
+    // Create a dictionary of input values from drop downs.
 
     let criteria={};
 
@@ -134,8 +156,15 @@ function checkSited() {
     let shape = document.getElementById("selectShape");
     criteria.shape=shape.options[shape.selectedIndex].text;
 
+    // Clear table
     clearTbody();
+
+    //Call readList function passing the input dictionary as an argument
     readList(criteria);
 }
+
+// Call loadOptions function which load all dropdowns for html.
 loadOptions();
+
+// Initial call to checkSited function to load all dates into the table.
 checkSited();

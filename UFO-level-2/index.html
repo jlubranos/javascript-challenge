@@ -27,6 +27,9 @@
     </div>
     <div class="container">
       <div class="row margin-top-50">
+
+<!-- Below is the form created for all the drop downs-->
+
         <form onclick="return false">
           <div class="row option_center">
             <h3>Please select options available...</h3>
@@ -62,6 +65,8 @@
                 <option value="1">All</option>
               </select>
             </div>
+
+<!-- Decided to call checkSited function from html instead of .on("click",checkSited) method which was done in UFO-level-1 -->
               <button type="submit" class="btn btn-primary" onclick="checkSited()">Submit</button>
             </div>
           </form>            
