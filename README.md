@@ -1,5 +1,5 @@
 # javascript-challenge
 
-![UFO] (static/images/nasa.jpg)
+![UFO] (UFO-level-1/static/images/nasa.jpg)
 
 ## UFO-level-1
