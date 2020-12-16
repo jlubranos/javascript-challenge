@@ -13,5 +13,5 @@
  ####   This program has 5 drop down options the user can choose from.  The choices for each of those drop downs are
  ####   created according to the data list provided.  Each list contains unique options to choose from in sorted order
  ####   with the exception of the date dropdown.  Due to the format of the dates provided the sort will not completely
- ####   sort dates in ascending order.  When the user chooses all the options desired click the submit button and the program
- ####   displays results if any.  This program utilizes jquery methods.
+ ####   sort dates in ascending order.  When the user chooses all the options desired click the submit button and the 
+ ####   program displays results if any.  This program utilizes jquery methods.
